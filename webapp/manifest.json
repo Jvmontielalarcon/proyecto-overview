@@ -1,0 +1,138 @@
+{
+	"_version": "1.7.0",
+	"start_url": "start.html",
+	"sap.app": {
+		"id": "com.tandem.ovp.es5demo",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{app_title}}",
+		"description": "{{app_description}}",
+		"dataSources": {
+			"GWSAMPLE_BASIC": {
+				"uri": "/ES5/sap/opu/odata/iwbep/GWSAMPLE_BASIC/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml",
+					"annotations": [
+						"annotation"
+					]
+				}
+			},
+			"annotation": {
+				"type": "ODataAnnotation",
+				"uri": "localService/GWSAMPLE_BASIC/annotation.xml",
+				"settings": {
+					"localUri": "localService/GWSAMPLE_BASIC/annotation.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "OVP.cardtemplate",
+			"version": "0.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"dependencies": {
+			"minUI5Version": "${sap.ui5.dist.version}",
+			"libs": {
+				"sap.ovp": {}
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"@i18n": {
+				"preload": true,
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"GWSAMPLE_BASIC": {
+				"dataSource": "GWSAMPLE_BASIC",
+				"settings": {
+					"defaultCountMode": "Inline"
+				}
+			}
+		},
+		"extends": {
+			"extensions": {}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		}
+	},
+	"sap.ovp": {
+		"globalFilterModel": "GWSAMPLE_BASIC",
+		"globalFilterEntityType": "SalesOrder",
+		"containerLayout": "fixed",
+		"enableLiveFilter": true,
+		"considerAnalyticalParameters": false,
+		"cards": {
+			"card00": {
+				"model": "GWSAMPLE_BASIC",
+				"template": "sap.ovp.cards.table",
+				"settings": {
+					"title": "{{card00_title}}",
+					"entitySet": "SalesOrderSet",
+					"addODataSelect": false,
+					"annotationPath": "com.sap.vocabularies.UI.v1.LineItem#qlfSalesOrders"
+				}
+			},
+			"card01": {
+				"model": "GWSAMPLE_BASIC",
+				"template": "sap.ovp.cards.list",
+				"settings": {
+					"title": "{{card01_title}}",
+					"entitySet": "SalesOrderSet",
+					"listType": "condensed",
+					"listFlavor": "standard",
+					"addODataSelect": false,
+					"annotationPath": "com.sap.vocabularies.UI.v1.LineItem#qlfSalesOrders"
+				}
+			},
+			"card02": {
+				"model": "GWSAMPLE_BASIC",
+				"template": "sap.ovp.cards.list",
+				"settings": {
+					"title": "{{card01_title}}",
+					"entitySet": "SalesOrderSet",
+					"listType": "extended",
+					"listFlavor": "bar",
+					"addODataSelect": false,
+					"annotationPath": "com.sap.vocabularies.UI.v1.LineItem#qlfSalesOrders"
+				}
+			},
+			"card03": {
+				"model": "GWSAMPLE_BASIC",
+				"template": "sap.ovp.cards.stack",
+				"settings": {
+					"title": "{{card03_title}}",
+					"entitySet": "SalesOrderSet",
+					"addODataSelect": false,
+				    "annotationPath": "com.sap.vocabularies.UI.v1.FieldGroup#custContact",
+					"identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification,com.sap.vocabularies.UI.v1.Identification#awaitApproval"
+				}
+			}
+		}
+	}
+}
