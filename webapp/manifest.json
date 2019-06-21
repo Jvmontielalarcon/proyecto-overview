@@ -130,9 +130,35 @@
 					"entitySet": "SalesOrderSet",
 					"addODataSelect": false,
 				    "annotationPath": "com.sap.vocabularies.UI.v1.FieldGroup#custContact",
+					"objectStreamCardsSettings": {
+						"annotationPath": "com.sap.vocabularies.UI.v1.Facets"
+					},
 					"identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification,com.sap.vocabularies.UI.v1.Identification#awaitApproval"
 				}
+			},
+			"card04": {
+				"model": "GWSAMPLE_BASIC",
+				"template": "sap.ovp.cards.charts.analytical",
+				"settings": {
+					"title": "{{card03_title}}",
+					"entitySet": "SalesOrderSet",
+					"addODataSelect": false,
+				    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#NetTaxAmount_by_SO",
+				    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#Top5NetAmount"
+				}
+			},
+			"card05": {
+				"model": "GWSAMPLE_BASIC",
+				"template": "sap.ovp.cards.charts.analytical",
+				"settings": {
+					"title": "{{card03_title}}",
+					"entitySet": "SalesOrderSet",
+					"addODataSelect": false,
+				    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#NetAmount_by_SO",
+				    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#Top5NetAmount"
+				}
 			}
+			
 		}
 	}
 }

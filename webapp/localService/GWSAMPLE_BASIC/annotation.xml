@@ -26,6 +26,12 @@
 	<edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
 		<edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
 	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/462030211/Analytics.xml">
+		<edmx:Include Alias="Analytics" Namespace="com.sap.vocabularies.Analytics.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/496435637/PersonalData.xml">
+		<edmx:Include Alias="PersonalData" Namespace="com.sap.vocabularies.PersonalData.v1"/>
+	</edmx:Reference>
 	<edmx:DataServices>
 		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
 			<Annotations Target="GWSAMPLE_BASIC.SalesOrder">
@@ -33,7 +39,7 @@
 					<Collection>
 						<Record Type="UI.ReferenceFacet">
 							<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#custContact"/>
-							<Annotation Term="UI.IsSummary" Bool="true"/>
+							<Annotation Term="UI.IsSummary"/>
 						</Record>
 					</Collection>
 				</Annotation>
@@ -43,11 +49,11 @@
 						<PropertyValue Property="Data">
 							<Collection>
 								<Record Type="UI.DataField">
-									<PropertyValue Property="Value" Path="ToBusinessPartner/ToContacts/EmailAddress"/>
+									<PropertyValue Property="Value" Path="ToBusinessPartner/EmailAddress"/>
 									<PropertyValue Property="Label" String="Email"/>
 								</Record>
 								<Record Type="UI.DataField">
-									<PropertyValue Property="Value" Path="ToBusinessPartner/ToContacts/PhoneNumber"/>
+									<PropertyValue Property="Value" Path="ToBusinessPartner/PhoneNumber"/>
 									<PropertyValue Property="Label" String="Telefono"/>
 								</Record>
 							</Collection>
@@ -72,15 +78,6 @@
 						</Record>
 					</Collection>
 				</Annotation>
-				<Annotation Term="UI.Identification">
-					<Collection>
-						<Record Type="UI.DataFieldForIntentBasedNavigation">
-							<PropertyValue Property="SemanticObject" String="Action"/>
-							<PropertyValue Property="Action" String="toappnavsample"/>
-							<PropertyValue Property="Label" String="Sales Orders List"/>
-						</Record>
-					</Collection>
-				</Annotation>
 				<Annotation Term="UI.HeaderInfo">
 					<Record Type="UI.HeaderInfoType">
 						<PropertyValue Property="TypeName" String="Sales Order"/>
@@ -98,6 +95,15 @@
 							</Record>
 						</PropertyValue>
 					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="Action"/>
+							<PropertyValue Property="Action" String="toappnavsample"/>
+							<PropertyValue Property="Label" String="Sales Orders List"/>
+						</Record>
+					</Collection>
 				</Annotation>
 				<Annotation Term="UI.DataPoint" Qualifier="TaxAmount">
 					<Record Type="UI.DataPointType">
@@ -142,6 +148,66 @@
 							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#dpLifecycle"/>
 						</Record>
 					</Collection>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="NetTaxAmount_by_SO">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="Title" String="SO Net/Tax Amount"/>
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Bar"/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="NetAmount"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="TaxAmount"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="SalesOrderID"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Series"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="NetAmount_by_SO">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="Title" String="SO Net/Tax Amount"/>
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut"/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="NetAmount"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="SalesOrderID"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant" Qualifier="Top5NetAmount">
+					<Record Type="UI.PresentationVariantType">
+						<PropertyValue Property="MaxItems" Int="5"/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="NetAmount"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
 				</Annotation>
 			</Annotations>
 		</Schema>
